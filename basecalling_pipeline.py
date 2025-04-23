@@ -20,41 +20,44 @@ if basecalling_option not in ["HAC", "SUP"]:
     raise ValueError("Invalid basecalling option. Choose either 'HAC' or 'SUP'.")
 
 # Define basecalling parameters per kit
+BASECALL_CONFIG_DIR = "/opt/ont/dorado/data/"
+REF_DIR = "/data/refs/"
+
 kit_settings = {
     "LSK114": {
         "barcode_flag": "",
-        "ref": "/data/refs/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
-        "config": f"/opt/ont/dorado/data/dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
+        "config": f"{BASECALL_CONFIG_DIR}dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
     },
     "RBK24": {
         "barcode_flag": "--barcode_kits 'SQK-RBK114-24'",
-        "ref": "/data/refs/lambda_757a991a.fasta",
-        "config": f"/opt/ont/dorado/data/dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}lambda_757a991a.fasta",
+        "config": f"{BASECALL_CONFIG_DIR}dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
     },
     "RBK96": {
         "barcode_flag": "--barcode_kits 'SQK-RBK114-96'",
-        "ref": "/data/refs/lambda_757a991a.fasta",
-        "config": f"/opt/ont/dorado/data/dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}lambda_757a991a.fasta",
+        "config": f"{BASECALL_CONFIG_DIR}dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
     },
     "NBD24": {
         "barcode_flag": "--barcode_kits 'SQK-NBD114-24'",
-        "ref": "/data/refs/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
-        "config": f"/opt/ont/dorado/data/dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
+        "config": f"{BASECALL_CONFIG_DIR}dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
     },
     "NBD96": {
         "barcode_flag": "--barcode_kits 'SQK-NBD114-96'",
-        "ref": "/data/refs/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
-        "config": f"/opt/ont/dorado/data/dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
+        "config": f"{BASECALL_CONFIG_DIR}dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
     },
     "RNA": {
         "barcode_flag": "",  
-        "ref": "/data/refs/RNA_YHR174W.fasta",
-        "config": f"/opt/ont/dorado/data/rna_rp4_130bps_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}RNA_YHR174W.fasta",
+        "config": f"{BASECALL_CONFIG_DIR}rna_rp4_130bps_{basecalling_option.lower()}.cfg"
     },
     "ULK114": {
         "barcode_flag": "",
-        "ref": "/data/refs/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
-        "config": f"/opt/ont/dorado/data/dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
+        "ref": f"{REF_DIR}GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.mmi",
+        "config": f"{BASECALL_CONFIG_DIR}dna_r10.4.1_e8.2_400bps_5khz_{basecalling_option.lower()}.cfg"
     }
 }
 
@@ -146,4 +149,3 @@ for (flowcell_id, run_id), group in df.groupby(["flowcell_id", "run_id"]):
     output_filename = f"sequencing_summary_{flowcell_id}_{run_id_short}_{basecalling_option}_1%.txt"
     print(f"Writing: {output_filename} with {len(group)} rows")
     group.to_csv(output_filename, sep="\t", index=False)
-
