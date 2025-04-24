@@ -10,4 +10,7 @@ pandas: pip install pandas
 install .py file in /data/ or usr/bin
 
 Usage: 
+cd /data/{yourdirectory}/no_sample
 run: python3 /data/pipeline_name
+
+RUN IT FROM data/directory/no_sample
