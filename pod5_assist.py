@@ -13,11 +13,11 @@ def run_command(cmd, shell=True):
 
 # Step 1: do 10% mini sum
     
-run_command('for seqsum in */sequencing_summary_????????_????????_????????.txt; do filename=$(basename "${seqsum%.*}"); csvtk -t sample -p 0.1 "$seqsum" > "${filename}_10%_ss.txt"; done')
+#run_command('for seqsum in */sequencing_summary_????????_????????_????????.txt; do filename=$(basename "${seqsum%.*}"); csvtk -t sample -p 0.01 "$seqsum" > "${filename}_1%_ss.txt"; done')
 
 # Step 2: read_ids
 read_ids = []
-for filename in glob.glob("sequencing_summary_????????_????????_????????_10%_ss.txt"):
+for filename in glob.glob("*/sequencing_summary_????????_????????_????????_1%_ss.txt"):
     print(f"Reading from: {filename}")
     df = pd.read_csv(filename, sep="\t")
     if "read_id" in df.columns:
@@ -54,7 +54,7 @@ os.makedirs(filtered_pod5_dir, exist_ok=True)
 # Step 6: Combine filtered .pod5 files into a single output file
 
 # Define the output file for the combined filtered .pod5
-filtered_pod5_output = "10%_filtered"
+filtered_pod5_output = "1%_filtered"
 
 # Run the pod5 filter command with --force-overwrite
 run_command(
@@ -66,7 +66,7 @@ print(f"Filtered .pod5 file created: {filtered_pod5_dir}/{filtered_pod5_output}.
 # Step 7: Split the filtered .pod5 file into individual files by filename_pod5
 
 # Find sequencing summary files
-files = glob.glob("2025*/sequencing_summary_????????_????????_????????_1%_ss.txt")
+files = glob.glob("*/sequencing_summary_????????_????????_????????_1%_ss.txt")
 print(f"Found files: {files}")
 if not files:
     raise FileNotFoundError("No sequencing summary files found matching the pattern.")
