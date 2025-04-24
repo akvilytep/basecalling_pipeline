@@ -1,6 +1,6 @@
 Project title: pipelines
 
-Description: tehse pipelines are tailored to handle ONT directories. Basecalling_pipeline handles a subset (1-10%) of multidirectory basecalling in one go using pod5s.
+Description: these pipelines are tailored to handle ONT directories. Basecalling_pipeline handles a subset (1-10%) of multidirectory basecalling in one go using pod5s.
 
 Installation instructions: 
 pip: python get-pip.py
